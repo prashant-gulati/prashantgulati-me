@@ -35,14 +35,11 @@
   <div id="feed"><p style="color:#888;font-size:0.9rem;">Loading posts...</p></div>
 
   <script>
-    const RSS_URL = 'https://prashantgulati.substack.com/feed';
-    const API = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(RSS_URL)}&count=10`;
-
-    fetch(API)
+    fetch('/api/feed')
       .then(r => r.json())
       .then(data => {
         const container = document.getElementById('feed');
-        if (data.status !== 'ok' || !data.items.length) {
+        if (data.status !== 'ok' || !data.items || !data.items.length) {
           container.innerHTML = '<p class="error">Could not load posts.</p>';
           return;
         }
