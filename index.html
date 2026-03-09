@@ -52,6 +52,12 @@
     .project-name a { color: #1a1a1a; text-decoration: none; }
     .project-name a:hover { text-decoration: underline; }
     .project-desc { font-size: 0.9rem; color: #444; line-height: 1.5; margin-top: 3px; }
+    .repo { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 10px 0; border-bottom: 1px solid #f0f0f0; }
+    .repo:last-child { border-bottom: none; }
+    .repo a { font-size: 0.95rem; color: #1a1a1a; text-decoration: none; }
+    .repo a:hover { text-decoration: underline; }
+    .repo-desc { font-size: 0.85rem; color: #666; margin-top: 2px; }
+    .repo-lang { font-size: 0.75rem; color: #aaa; white-space: nowrap; font-family: -apple-system, BlinkMacSystemFont, sans-serif; }
     nav {
       margin-bottom: 48px;
       display: flex;
@@ -178,6 +184,9 @@
   <h3>Classical ML</h3>
   <!-- Add classical ML projects here -->
 
+  <h3>GitHub Repos</h3>
+  <div id="gh-repos"><p style="color:#888;font-size:0.9rem;">Loading repos...</p></div>
+
   <h2 id="writing">Writing</h2>
   <div id="feed"><p style="color:#888;font-size:0.9rem;">Loading posts...</p></div>
   <a href="https://prashantgulati.substack.com" target="_blank" rel="noopener" style="font-size:0.9rem;color:#555;text-decoration:none;border-bottom:1px solid #ccc;">See all writing</a>
@@ -212,6 +221,25 @@
   <p class="copyright">&copy; 2026 Prashant Gulati</p>
 
   <script>
+    fetch('https://api.github.com/users/prashant-gulati/repos?sort=updated&per_page=100')
+      .then(r => r.json())
+      .then(repos => {
+        const container = document.getElementById('gh-repos');
+        const filtered = repos.filter(r => !r.fork && r.name !== 'prashantgulati-me');
+        if (!filtered.length) { container.innerHTML = '<p class="error">Could not load repos.</p>'; return; }
+        container.innerHTML = filtered.map(r => `
+          <div class="repo">
+            <div>
+              <a href="${r.html_url}" target="_blank" rel="noopener">${r.name}</a>
+              ${r.description ? `<div class="repo-desc">${r.description}</div>` : ''}
+            </div>
+            ${r.language ? `<span class="repo-lang">${r.language}</span>` : ''}
+          </div>`).join('');
+      })
+      .catch(() => {
+        document.getElementById('gh-repos').innerHTML = '<p class="error">Could not load repos.</p>';
+      });
+
     fetch('/api/feed')
       .then(r => r.json())
       .then(data => {
