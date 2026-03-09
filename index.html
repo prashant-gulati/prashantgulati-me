@@ -15,6 +15,9 @@
     }
     h1 { font-size: 2rem; margin-bottom: 8px; }
     h2 { font-size: 1.2rem; margin: 48px 0 20px; border-bottom: 1px solid #eee; padding-bottom: 8px; }
+    p { line-height: 1.7; color: #333; font-size: 0.95rem; }
+    ul { padding-left: 20px; margin: 0; }
+    ul li { line-height: 1.9; color: #333; font-size: 0.95rem; }
     .post { margin-bottom: 32px; }
     .post a {
       font-size: 1.1rem;
@@ -26,6 +29,12 @@
     .post .meta { font-size: 0.8rem; color: #888; margin: 4px 0 8px; }
     .post .desc { font-size: 0.95rem; color: #444; line-height: 1.5; }
     .error { color: #c00; font-size: 0.9rem; }
+    .job { margin-bottom: 28px; }
+    .job-header { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+    .job-company { font-weight: bold; font-size: 1rem; }
+    .job-dates { font-size: 0.8rem; color: #888; white-space: nowrap; }
+    .job-title { font-size: 0.9rem; color: #555; margin: 2px 0 6px; }
+    .job-desc { font-size: 0.9rem; color: #444; line-height: 1.5; }
     .contact {
       margin-top: 64px;
       padding-top: 24px;
@@ -33,20 +42,81 @@
       display: flex;
       gap: 20px;
     }
-    .contact a {
-      color: #555;
-      transition: color 0.15s;
-    }
+    .contact a { color: #555; transition: color 0.15s; }
     .contact a:hover { color: #1a1a1a; }
     .contact svg { display: block; width: 22px; height: 22px; }
+    .copyright { margin-top: 40px; font-size: 0.8rem; color: #aaa; }
   </style>
 </head>
 <body>
   <h1>Prashant Gulati</h1>
 
+  <h2>About</h2>
+  <ul>
+    <li>Citizen of the world &ndash; lived in 4 countries (Bahrain, India, US, Canada) and visited over 25</li>
+    <li>UC Berkeley MBA &amp; Georgia Tech Computer Science alum</li>
+    <li>Vipassana meditator</li>
+  </ul>
+
+  <h2>Work</h2>
+
+  <div class="job">
+    <div class="job-header">
+      <span class="job-company">Google</span>
+      <span class="job-dates">2019 &ndash; Present</span>
+    </div>
+    <div class="job-title">Group Product Manager, YouTube Ads (2023&ndash;Present)</div>
+    <div class="job-desc">AI/ML optimization for YouTube Shorts Ads Quality, driving >$500M in ARR.</div>
+    <div class="job-title" style="margin-top:8px;">Group Product Manager, Google Cloud (2019&ndash;2023)</div>
+    <div class="job-desc">Built Eventarc from zero to GA, serving 2,000+ enterprise customers at 1.5B events/month. Then led GCP Billing Platform handling $10B ARR across 100+ products.</div>
+  </div>
+
+  <div class="job">
+    <div class="job-header">
+      <span class="job-company">AI Builder &amp; Investor</span>
+      <span class="job-dates">2025 &ndash; Present</span>
+    </div>
+    <div class="job-desc">Applying NLP, CV, and RL to industry use-cases. Investments include Shopcircle, Smileidentity, and Owl.co.</div>
+  </div>
+
+  <div class="job">
+    <div class="job-header">
+      <span class="job-company">RBC Ventures</span>
+      <span class="job-dates">2018 &ndash; 2019</span>
+    </div>
+    <div class="job-title">Sr Director of Product</div>
+    <div class="job-desc">RBC's venture incubation arm &ndash; building, buying, and partnering with product companies to drive customer acquisition.</div>
+  </div>
+
+  <div class="job">
+    <div class="job-header">
+      <span class="job-company">FreshMonk (91 Design Labs)</span>
+      <span class="job-dates">2014 &ndash; 2018</span>
+    </div>
+    <div class="job-title">CEO &amp; Co-founder</div>
+    <div class="job-desc">Founded India's Teespring. Grew to $1.8M/yr revenue, 3.6M visitors/yr, and 60K customers across 20+ countries with a 25-person team. Exited via 100% share sale.</div>
+  </div>
+
+  <div class="job">
+    <div class="job-header">
+      <span class="job-company">Gulati &amp; Gulati Healthcare</span>
+      <span class="job-dates">2011 &ndash; 2014</span>
+    </div>
+    <div class="job-title">COO &amp; Co-founder</div>
+    <div class="job-desc">Bootstrapped a surgery concierge company to $300K ARR across India, Africa, and the Middle East.</div>
+  </div>
+
+  <div class="job">
+    <div class="job-header">
+      <span class="job-company">Capital One</span>
+      <span class="job-dates">2005 &ndash; 2009</span>
+    </div>
+    <div class="job-title">Principal PM</div>
+    <div class="job-desc">Data-driven email and search ads acquisition for Capital One Home Loans, driving $4B/yr in loans on a $15M budget.</div>
+  </div>
+
   <h2>Writing</h2>
   <div id="feed"><p style="color:#888;font-size:0.9rem;">Loading posts...</p></div>
-
   <a href="https://prashantgulati.substack.com" target="_blank" rel="noopener" style="font-size:0.9rem;color:#555;text-decoration:none;border-bottom:1px solid #ccc;">See all writing</a>
 
   <div class="contact">
@@ -75,6 +145,8 @@
       </svg>
     </a>
   </div>
+
+  <p class="copyright">&copy; 2026 Prashant Gulati</p>
 
   <script>
     fetch('/api/feed')
