@@ -52,19 +52,40 @@
     .project-name a { color: #1a1a1a; text-decoration: none; }
     .project-name a:hover { text-decoration: underline; }
     .project-desc { font-size: 0.9rem; color: #444; line-height: 1.5; margin-top: 3px; }
+    nav {
+      margin-bottom: 48px;
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    nav a {
+      font-size: 0.85rem;
+      color: #888;
+      text-decoration: none;
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      letter-spacing: 0.03em;
+    }
+    nav a:hover { color: #1a1a1a; }
   </style>
 </head>
 <body>
   <h1>Prashant Gulati</h1>
 
-  <h2>About</h2>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#work">Work</a>
+    <a href="#ai-projects">AI Projects</a>
+    <a href="#writing">Writing</a>
+  </nav>
+
+  <h2 id="about">About</h2>
   <ul>
     <li>Citizen of the world &ndash; lived in 4 countries (Bahrain, India, US, Canada) and visited over 25</li>
     <li>UC Berkeley MBA &amp; Georgia Tech Computer Science alum</li>
     <li>Vipassana meditator</li>
   </ul>
 
-  <h2>Work</h2>
+  <h2 id="work">Work</h2>
 
   <div class="job">
     <div class="job-header">
@@ -73,8 +94,18 @@
     </div>
     <div class="job-title">Group Product Manager, YouTube Ads (2023&ndash;Present)</div>
     <div class="job-desc">AI/ML optimization for YouTube Shorts Ads Quality, driving >$500M in ARR.</div>
+
+    Video of ads on YT Shorts
+    Evolving the ad serving model from no ads -> pre-determined placement of ads -> pre-determined placement + dynamic shifting to protect brand advertisers->
+    User-personalized ads: variable placement of ads - Time since last ad, user attractiveness to advertisers, threshold for reduction in user time spent on YT due to ads
+
+    Linear regression with constrained optimization, multi-class classification
+
     <div class="job-title" style="margin-top:8px;">Group Product Manager, Google Cloud (2019&ndash;2023)</div>
     <div class="job-desc">Built Eventarc from zero to GA, serving 2,000+ enterprise customers at 1.5B events/month. Then led GCP Billing Platform handling $10B ARR across 100+ products.</div>
+    Eventarc logo/site
+    Eventarc video
+    Press mentions
   </div>
 
   <div class="job">
@@ -82,7 +113,7 @@
       <span class="job-company">AI Builder &amp; Investor</span>
       <span class="job-dates">2025 &ndash; Present</span>
     </div>
-    <div class="job-desc">Applying NLP, CV, and RL to industry use-cases. Investments include Shopcircle, Smileidentity, and Owl.co.</div>
+    <div class="job-desc">Applying NLP, CV, and RL to industry use-cases. Investments include <a href="https://shopcircle.co" target="_blank" rel="noopener">Shopcircle</a>, <a href="https://smileidentity.com" target="_blank" rel="noopener">Smileidentity</a>, and <a href="https://owl.co" target="_blank" rel="noopener">Owl.co</a>.</div>
   </div>
 
   <div class="job">
@@ -121,7 +152,7 @@
     <div class="job-desc">Data-driven email and search ads acquisition for Capital One Home Loans, driving $4B/yr in loans on a $15M budget.</div>
   </div>
 
-  <h2>AI Projects</h2>
+  <h2 id="ai-projects">AI Projects</h2>
 
   <h3>Side Projects</h3>
   <!-- Add side projects here -->
@@ -138,7 +169,7 @@
   <h3>Classical ML</h3>
   <!-- Add classical ML projects here -->
 
-  <h2>Writing</h2>
+  <h2 id="writing">Writing</h2>
   <div id="feed"><p style="color:#888;font-size:0.9rem;">Loading posts...</p></div>
   <a href="https://prashantgulati.substack.com" target="_blank" rel="noopener" style="font-size:0.9rem;color:#555;text-decoration:none;border-bottom:1px solid #ccc;">See all writing</a>
 
@@ -180,7 +211,7 @@
           container.innerHTML = '<p class="error">Could not load posts.</p>';
           return;
         }
-        container.innerHTML = data.items.map(item => {
+        container.innerHTML = data.items.slice(0, 5).map(item => {
           const date = new Date(item.pubDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
           const desc = item.description.replace(/<[^>]+>/g, '').slice(0, 160).trim() + '…';
           return `
